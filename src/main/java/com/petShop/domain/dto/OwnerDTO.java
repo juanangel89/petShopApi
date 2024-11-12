@@ -1,14 +1,15 @@
 package com.petShop.domain.dto;
 
 import com.petShop.persistance.entity.Pet;
+import lombok.Data;
 
 import java.util.List;
-
+@Data
 public class OwnerDTO {
-    private Integer idOwner;
-    private String nameOwner;
-    private String lastNameOwner;
-    private String email;
-    private Integer number;
-    private String address;
+    private Integer idPropietario;
+    private String propietario;
+    private String apellido;
+    private String correo;
+    private Integer numero;
+    private String direccion;
 }

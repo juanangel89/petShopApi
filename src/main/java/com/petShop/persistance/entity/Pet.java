@@ -1,7 +1,13 @@
 package com.petShop.persistance.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+@Data
+@Getter
+@Setter
 @Entity
 @Table (name = "mascotas")
 public class Pet {
@@ -26,7 +32,6 @@ public class Pet {
     @ManyToOne
     @JoinColumn(name = "id_propietario") //llave a foranea
     private Owner owner;
-
 
     public Integer getIdPet() {
         return idPet;
@@ -66,5 +71,13 @@ public class Pet {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 }

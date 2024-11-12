@@ -1,15 +1,18 @@
 package com.petShop.domain.repository;
 
-import com.petShop.domain.PetDomain;
+import com.petShop.domain.dto.PetDTO;
 import java.util.List;
 import java.util.Optional;
 
 public interface PetDomainRepository {
-    List<PetDomain> getAll();
-    Optional<PetDomain> getPetById(int idPet);
-    PetDomain save(PetDomain petDomain);
+    Iterable<PetDTO> getAll();
+    Optional<PetDTO> getPetById(int idPet);
+    PetDTO save(PetDTO petDTO);
+    PetDTO update(PetDTO petDTO);
     void delete(int idPet);
     boolean existsPet(int idMascota);
     long countAll();
-    Optional<List<PetDomain>> getByName(String name);
+    Optional<List<PetDTO>> getByName(String name);
+
+//    List<PetDTO> findBySpeciesOrderByIdAsc(String species);
 }

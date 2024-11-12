@@ -2,10 +2,14 @@ package com.petShop.persistance.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Data
+@Getter
+@Setter
 @Entity
 @Table (name = "propietarios")
 public class Owner {
@@ -32,4 +36,13 @@ public class Owner {
 
     @OneToMany(mappedBy = "owner")
     private List<Pet> pets;
+
+    public Integer getIdOwner() {
+        return idOwner;
+    }
+
+    public void setIdOwner(Integer idOwner) {
+        this.idOwner = idOwner;
+    }
+
 }

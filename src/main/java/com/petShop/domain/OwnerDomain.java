@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 public class OwnerDomain {
-    private Integer idPorpietario;
+    private Integer idPropietario;
     private String propietario;
     private String apellido;
     private String correo;

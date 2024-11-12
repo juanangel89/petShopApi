@@ -1,5 +1,6 @@
 package com.petShop.domain.dto;
 
+import com.petShop.domain.OwnerDomain;
 import com.petShop.persistance.entity.Owner;
 import lombok.Data;
 
@@ -10,5 +11,7 @@ public class PetDTO {
     private String especie;
     private int edad;
     private String genero;
-    private Owner propietario;
+    private OwnerDomain propietarioDominio;
+
+
 }

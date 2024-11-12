@@ -1,8 +1,11 @@
 package com.petShop.persistance.mapper;
 
 import ch.qos.logback.core.model.ComponentModel;
-import com.petShop.domain.OwnerDomain;
+import com.petShop.domain.dto.OwnerDTO;
+
 import com.petShop.persistance.entity.Owner;
+import com.petShop.persistance.entity.Pet;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -12,13 +15,17 @@ import java.util.List;
 @Mapper (componentModel = "spring")
 public interface OwnerMapper {
     @Mappings({
-            @Mapping(source = "idOwner",target = "idOwner"),
-            @Mapping(source = "nameOwner",target = "nameOwner"),
-            @Mapping(source = "lastNameOwner",target = "lastNameOwner"),
-            @Mapping(source = "email",target = "email"),
-            @Mapping(source = "number",target = "number"),
-            @Mapping(source = "address",target = "address")
+            @Mapping(source = "idOwner",target = "idPropietario"),
+            @Mapping(source = "nameOwner",target = "propietario"),
+            @Mapping(source = "lastNameOwner",target = "apellido"),
+            @Mapping(source = "email",target = "correo"),
+            @Mapping(source = "number",target = "numero"),
+            @Mapping(source = "address",target = "direccion")
     })
-    OwnerDomain toOwner(Owner owner);
-    List<OwnerDomain> toOwners(List<Owner> owners);
+    OwnerDTO toOwnerDTO(Owner owner);
+    Owner toEntity(OwnerDTO ownerDTO);
+    List<OwnerDTO> toOwnerDTO(List<Owner> owners);
+
+    @InheritInverseConfiguration
+    Owner toOwner(OwnerDTO ownerDTO);
 }
