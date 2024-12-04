@@ -10,7 +10,7 @@ public interface PetDomainRepository {
     PetDTO save(PetDTO petDTO);
     PetDTO update(PetDTO petDTO);
     void delete(int idPet);
-    boolean existsPet(int idMascota);
+    boolean existsPet(int idPet);
     long countAll();
     Optional<List<PetDTO>> getByName(String name);
 

@@ -10,24 +10,31 @@ public class BillDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer idDetailBill;
+    private Integer idBillDetail;
 
-    @Column(name = "id_productos_provedores")
-    private Integer idProductSupplier;
+    @ManyToOne
+    @JoinColumn(name = "id_cita", nullable = true)
+    private Appointment appointment; // Relación con la entidad Appointment
 
-    @Column(name = "id_cita")
-    private Integer idAppointment;
+    @ManyToOne
+    @JoinColumn(name = "id_producto", nullable = true)
+    private Product product; // Relación con la entidad Product
 
     @Column(name = "cantidad")
-    private Integer amountProduct;
-
-    @Column(name = "monto_cita")
-    private Integer priceAppointment;
-
-    @Column(name = "monto_producto")
-    private Integer dateProduc;
+    private Integer quantity;
 
     @Column(name = "fecha")
     private String date;
+
+    @Column(name = "precio_unitario")
+    private Double price;
+
+    public Integer getIdBillDetail() {
+        return idBillDetail;
+    }
+
+    public void setIdBillDetail(Integer idBillDetail) {
+        this.idBillDetail = idBillDetail;
+    }
 
 }

@@ -13,11 +13,20 @@ public class Employee {
     private Integer idEmployee;
 
     @Column(name = "nombre")
-    private String NameEmployee;
+    private String nameEmployee;
 
     @Column(name = "cargo")
     private String position;
 
     @Column(name = "telefono")
     private String number;
+
+
+    public Integer getIdEmployee() {
+        return idEmployee;
+    }
+
+    public void setIdEmployee(Integer idEmployee) {
+        this.idEmployee = idEmployee;
+    }
 }

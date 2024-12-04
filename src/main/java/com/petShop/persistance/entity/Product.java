@@ -17,10 +17,19 @@ public class Product {
     @Column(name = "descripcion")
     private String description;
 
+    @Column(name = "existencias")
+    private Integer stock;
+
     @Column(name = "precio")
     private Double price;
 
     @ManyToOne
     @JoinColumn(name = "id_proveedor") //llave foranea
     private Supplier supplier;
+
+    public Integer getIdProduct() { return idProduct;}
+
+    public void setIdProduct(Integer idProduct) {
+        this.idProduct = idProduct;
+    }
 }

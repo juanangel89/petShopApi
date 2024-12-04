@@ -60,23 +60,28 @@ public class PetRepository implements PetDomainRepository {
     @Override
     public PetDTO save(PetDTO petDTO) {
         Pet pet = mapper.toEntity(petDTO);
-        if (!existsPet(pet.getIdPet())) {
-            Pet savedPet = petCrudRepository.save(pet);
-            return mapper.toPetDTO(savedPet);
+        Integer petId = pet.getIdPet();
+
+        if (petId != null && existsPet(petId)) {
+            throw new IllegalArgumentException("El registro ya existe");
         }
-        throw new IllegalArgumentException("El registro ya existe");
+        Pet savedPet = petCrudRepository.save(pet);
+        return mapper.toPetDTO(savedPet);
     }
 
     // Actualizar
     @Override
     public PetDTO update(PetDTO petDTO) {
         Pet pet = mapper.toEntity(petDTO);
-        if (existsPet(pet.getIdPet())) {
-            Pet updatePet = petCrudRepository.save(pet);
-            return mapper.toPetDTO(updatePet);
+        Integer petId = pet.getIdPet();
+
+        if (petId == null || !existsPet(petId)) {
+            throw new IllegalArgumentException("El registro no existe para actualizar");
         }
-        throw new IllegalArgumentException("El registro no existe");
+        Pet updatedPet = petCrudRepository.save(pet);
+        return mapper.toPetDTO(updatedPet);
     }
+
     // Eliminar
     @Override
     public void delete(int id) {

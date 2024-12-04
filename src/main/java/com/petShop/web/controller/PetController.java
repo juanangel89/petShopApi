@@ -2,10 +2,14 @@ package com.petShop.web.controller;
 
 import com.petShop.domain.dto.PetDTO;
 import com.petShop.domain.service.PetService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -14,9 +18,21 @@ public class PetController {
     @Autowired
     private PetService petService;
 
+//    @GetMapping("/getAll")
+//    public Iterable<PetDTO> getAll() {
+//        return petService.getAll();
+//    }
+
+    // Consultar todos los registros
+    @Operation(summary = "Obtener todas las mascotas", description = "Retorna una lista de todas las mascotas registradas")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista de mascotas obtenida exitosamente"),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
     @GetMapping("/getAll")
-    public Iterable<PetDTO> getAll() {
-        return petService.getAll();
+    public ResponseEntity<Iterable<PetDTO>> getAll() {
+        Iterable<PetDTO> pets = petService.getAll();
+        return new ResponseEntity<>(pets, HttpStatus.OK);
     }
 
     @GetMapping("/getById/{id}")
@@ -29,7 +45,7 @@ public class PetController {
         return petService.save(petDTO);
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     public PetDTO update(@RequestBody PetDTO petDTO) {
         return petService.update(petDTO);
     }

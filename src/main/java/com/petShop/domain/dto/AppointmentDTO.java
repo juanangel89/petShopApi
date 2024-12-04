@@ -4,7 +4,13 @@ import lombok.Data;
 
 @Data
 public class AppointmentDTO {
-    private Integer idAppointment;
-    private Integer idDatesAppointments;
-    private String description;
+    private Integer idCita;
+
+    private Integer mascotaDominio;
+
+    private Integer empleadoDominio;
+
+    private String descripcion;
+
+    private String fecha;
 }

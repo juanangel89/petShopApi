@@ -36,25 +36,43 @@ public class OwnerRepository implements OwnerDomainRepository {
         Optional<Owner> owner = ownerCrudRepository.findById(idOwner);
         return owner.map(mapper::toOwnerDTO);
     }
+
+    // Guardar
     @Override
     public OwnerDTO save(OwnerDTO ownerDTO){
+        System.out.println("Datos recibidos en DTO: " + ownerDTO);
+
         Owner owner = mapper.toEntity(ownerDTO);
-        if (!existsOwner(owner.getIdOwner())) {
-            Owner savedOwner = ownerCrudRepository.save(owner);
-            return mapper.toOwnerDTO(savedOwner);
+        System.out.println("Datos mapeados a la entidad: " + owner);
+
+        Integer ownerId = owner.getIdOwner();
+
+        if (ownerId != null && existsOwner(ownerId)) {
+            throw new IllegalArgumentException("El registro ya existe");
         }
-        throw new IllegalArgumentException("El registro ya existe");
+        Owner savedOwner = ownerCrudRepository.save(owner);
+        System.out.println("Datos guardados en la base de datos: " + savedOwner);
+        return mapper.toOwnerDTO(savedOwner);
     }
 
+    // Actualizar
     @Override
     public OwnerDTO update(OwnerDTO ownerDTO){
+        System.out.println("Datos recibidos en DTO: " + ownerDTO);
+
         Owner owner = mapper.toEntity(ownerDTO);
-        if (existsOwner(owner.getIdOwner())) {
-            Owner updateOwner = ownerCrudRepository.save(owner);
-            return mapper.toOwnerDTO(updateOwner);
+        System.out.println("Datos mapeados a la entidad: " + owner);
+
+        Integer ownerId = owner.getIdOwner();
+
+        if (!existsOwner(ownerId)) {
+            throw new IllegalArgumentException("El registro  no existe");
         }
-        throw new IllegalArgumentException("El registro no existe");
+        Owner updateOwner = ownerCrudRepository.save(owner);
+        System.out.println("Datos guardados en la base de datos: " + updateOwner);
+        return mapper.toOwnerDTO(updateOwner);
     }
+
     @Override
     public void delete(int idOwner){
 
@@ -72,4 +90,10 @@ public class OwnerRepository implements OwnerDomainRepository {
     public long countAll(){
         return ownerCrudRepository.count();
     }
+
+    @Override
+    public Optional<List<OwnerDTO>> getByName(String name) {
+        return Optional.empty();
+    }
+
 }

@@ -19,17 +19,23 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	runtimeOnly 'com.mysql:mysql-connector-j'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'org.mapstruct:mapstruct:1.6.2'
+	// implementation 'net.bytebuddy:byte-buddy:1.14.0'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.2'
 
-	implementation 'org.mapstruct:mapstruct:1.6.0'
+	// Swagger Annotations
+	implementation 'io.swagger.core.v3:swagger-annotations:2.2.15'
 
-	annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.0'
-
+	// Springdoc OpenAPI for Spring Boot
+	implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
 }
 
 tasks.named('test') {

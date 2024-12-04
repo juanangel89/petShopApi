@@ -34,8 +34,9 @@ public class Owner {
     @Column(name = "direccion")
     private String address;
 
-    @OneToMany(mappedBy = "owner")
-    private List<Pet> pets;
+//    @OneToMany(mappedBy = "owner")
+//    private List<Pet> pets;
+
 
     public Integer getIdOwner() {
         return idOwner;

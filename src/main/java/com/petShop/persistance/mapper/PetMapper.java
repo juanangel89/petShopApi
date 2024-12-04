@@ -13,39 +13,29 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = {OwnerMapper.class})
 public interface PetMapper {
     @Mappings({
-            @Mapping(source = "idPet",target = "idMascota"),
-            @Mapping(source = "namePet",target = "mascota"),
-            @Mapping(source = "species",target = "especie"),
-            @Mapping(source = "age",target = "edad"),
-            @Mapping(source = "gender",target = "genero"),
-            @Mapping(source = "owner",target = "propietarioDominio") //es una llave foranea
+            @Mapping(source = "idPet", target = "idMascota"),
+            @Mapping(source = "namePet", target = "mascota"),
+            @Mapping(source = "species", target = "especie"),
+            @Mapping(source = "age", target = "edad"),
+            @Mapping(source = "gender", target = "genero"),
+            @Mapping(source = "owner.idOwner", target = "propietarioDominio") // Relación con OwnerMapper
     })
     PetDTO toPetDTO(Pet pet);
-//    List<PetDTO> toPetDTOs(List<Pet> pets);
 
-    // Método de mapeo explícito para convertir Propietario a Long (su id)
     @InheritInverseConfiguration
-    Pet toPet(PetDTO petDTO);
-
-    @Mapping(target = "owner", source = "propietarioDominio")
+    @Mapping(target = "owner", ignore = true) // Requiere un método explícito
     Pet toEntity(PetDTO petDTO);
 
-    // Método de mapeo explícito para convertir Propietario
-    @Mapping(target = "idOwner", source = "owner")
-    default Integer map(Owner owner) {
-        if (owner != null) {
-            return owner.getIdOwner(); // Retorna el id del propietario
-        } return null;
-    }
-
-// Método de mapeo explícito para convertir Long (id) a Propietario
-@Mapping(target = "idOwner", source = "propietarioDominio")
-default Owner map(Integer propietarioDominio) {
-        if (propietarioDominio != null) {
-            Owner owner = new Owner();
-            owner.setIdOwner(propietarioDominio); // Crear Propietario con el id proporcionado
-            return owner;
-        } return null;
-    }
-
+    // Método explícito para convertir Integer (ID del propietario) a Owner
+//    default Owner map(Integer idOwner) {
+//        if (idOwner != null) {
+//            Owner owner = new Owner();
+//            owner.setIdOwner(idOwner);
+//            return owner;
+//        }
+//        return null;
+//    }
+    // Métodos para listas
+    List<PetDTO> toPetDTOs(List<Pet> pets);
+    List<Pet> toPets(List<PetDTO> petDTOs);
 }

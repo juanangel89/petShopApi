@@ -9,12 +9,26 @@ import lombok.Data;
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_cita")
+    @Column(name = "id")
     private Integer idAppointment;
 
-    @Column(name = "id_datos_citas")
-    private Integer idDatesAppointments;
+    @ManyToOne
+    @JoinColumn(name = "id_mascota") //llave a foranea
+    private Pet pet;
+
+    @ManyToOne
+    @JoinColumn(name = "id_empleado") //llave a foranea
+    private Employee employee;
 
     @Column(name = "descripcion")
     private String description;
+
+    @Column(name = "fecha")
+    private String date;
+
+    public Integer getIdAppointment() { return idAppointment;}
+
+    public void setIdAppointment(Integer idAppointment) {
+        this.idAppointment = idAppointment;
+    }
 }

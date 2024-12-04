@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/Owners")
+@RequestMapping("/owners")
 public class OwnerController {
     @Autowired
     private OwnerService ownerService;
@@ -19,8 +19,7 @@ public class OwnerController {
     }
 
     @GetMapping("/getById/{id}")
-    public Optional<OwnerDTO> getOwnerById(@PathVariable("id") int id) {
-        return ownerService.getOwnerById(id);
+    public Optional<OwnerDTO> getOwnerById(@PathVariable("id") int id) { return ownerService.getOwnerById(id);
     }
 
     @PostMapping("/save")
@@ -28,7 +27,7 @@ public class OwnerController {
         return ownerService.save(ownerDTO);
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     public OwnerDTO update(@RequestBody OwnerDTO ownerDTO) {
         return ownerService.update(ownerDTO);
     }
@@ -44,7 +43,7 @@ public class OwnerController {
     }
 
     @GetMapping("/countOwners")
-    public long countPets() {
+    public long countOwners() {
         return ownerService.countAll();
     }
 }

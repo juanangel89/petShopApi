@@ -3,7 +3,6 @@ package com.petShop.domain.service;
 
 import com.petShop.domain.dto.PetDTO;
 import com.petShop.domain.repository.PetDomainRepository;
-import com.petShop.persistance.mapper.PetMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +14,6 @@ public class PetService {
     @Autowired
     private PetDomainRepository petDomainRepository; //llamar a petrepositoriy
 
-    @Autowired
-    private PetMapper petMapper;
 
     public Iterable<PetDTO> getAll() {
         return petDomainRepository.getAll();
@@ -36,7 +33,7 @@ public class PetService {
     }
 
     public PetDTO update(PetDTO petDTO){
-        return petDomainRepository.save(petDTO);
+        return petDomainRepository.update(petDTO);
     }
 
     public void delete(int id){
